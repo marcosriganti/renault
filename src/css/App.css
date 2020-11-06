@@ -1,0 +1,132 @@
+@font-face {
+  font-family: 'Avenir';
+  src: url('font/AvenirLTStd-Light.eot');
+  src: url('font/AvenirLTStd-Light.eot?#iefix') format('embedded-opentype'),
+    url('font/AvenirLTStd-Light.woff2') format('woff2'),
+    url('font/AvenirLTStd-Light.woff') format('woff'),
+    url('font/AvenirLTStd-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('font/AvenirLTStd-Black.eot');
+  src: url('font/AvenirLTStd-Black.eot?#iefix') format('embedded-opentype'),
+    url('font/AvenirLTStd-Black.woff2') format('woff2'),
+    url('font/AvenirLTStd-Black.woff') format('woff'),
+    url('font/AvenirLTStd-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('font/AvenirLTStd-Medium.eot');
+  src: url('font/AvenirLTStd-Medium.eot?#iefix') format('embedded-opentype'),
+    url('font/AvenirLTStd-Medium.woff2') format('woff2'),
+    url('font/AvenirLTStd-Medium.woff') format('woff'),
+    url('font/AvenirLTStd-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background-color: #f4f5f7 !important;
+  font-family: 'Avenir', Arial, Helvetica, sans-serif
+}
+
+.login-top {
+  padding-bottom: 30px;
+}
+
+.login-top h1 {
+  font-size: 70px;
+  ;
+}
+
+.login-top img {
+  max-width: 100%;
+  width: 100%;
+}
+
+.legend {
+  color: #383b41;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid #383b41;
+  margin-bottom: 10px;
+}
+
+.rs-control-label {
+  color: #383b41;
+}
+
+.login-middle p {
+  color: #8e8e93;
+  margin: 15px 0 20px;
+  ;
+}
+
+.rs-btn-default {
+  color: #383b41 !important;
+  font-weight: bold;
+}
+
+.footer-link {
+  color: #383b41 !important;
+}
+
+.footer {
+  padding: 15px;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  ;
+}
+
+.social-links a i {
+  font-size: 20px;
+}
+
+.social-links a {
+  margin: 5px;
+  display: inline-block;
+
+  color: #383b41 !important;
+}
+
+.rs-navbar.rs-navbar-inverse {
+  background-color: #383b41;
+}
+
+.rs-navbar.rs-navbar-inverse .rs-nav-item-content:hover,
+.rs-navbar.rs-navbar-inverse .rs-navbar-nav .rs-nav-item>.rs-nav-item-content:hover,
+.rs-navbar.rs-navbar-inverse .rs-navbar-nav .rs-dropdown .rs-dropdown-toggle:hover,
+.rs-navbar.rs-navbar-inverse .rs-navbar-nav .rs-nav-item>.rs-nav-item-content:focus,
+.rs-navbar.rs-navbar-inverse .rs-navbar-nav .rs-dropdown .rs-dropdown-toggle:focus {
+  background-color: rgba(255, 2550, 255, .2) !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.rs-dropdown .rs-dropdown-menu {
+  background-color: #c1c7d0 !important
+}
+
+.rs-navbar.rs-navbar-inverse,
+.rs-navbar.rs-navbar-inverse .rs-navbar-header a.logo {
+  display: block;
+  padding: 5px;
+}
+
+
+.rs-navbar.rs-navbar-inverse .rs-navbar-header a.logo img {
+  max-height: 45px;
+}

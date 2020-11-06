@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Avenir';
+    src: url('font/AvenirLTStd-Light.eot');
+    src: url('font/AvenirLTStd-Light.eot?#iefix') format('embedded-opentype'),
+        url('font/AvenirLTStd-Light.woff2') format('woff2'),
+        url('font/AvenirLTStd-Light.woff') format('woff'),
+        url('font/AvenirLTStd-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Avenir';
+    src: url('font/AvenirLTStd-Black.eot');
+    src: url('font/AvenirLTStd-Black.eot?#iefix') format('embedded-opentype'),
+        url('font/AvenirLTStd-Black.woff2') format('woff2'),
+        url('font/AvenirLTStd-Black.woff') format('woff'),
+        url('font/AvenirLTStd-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Avenir';
+    src: url('font/AvenirLTStd-Medium.eot');
+    src: url('font/AvenirLTStd-Medium.eot?#iefix') format('embedded-opentype'),
+        url('font/AvenirLTStd-Medium.woff2') format('woff2'),
+        url('font/AvenirLTStd-Medium.woff') format('woff'),
+        url('font/AvenirLTStd-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    background-color: #f4f5f7 !important;
+    font-family: 'Avenir', Arial, Helvetica, sans-serif
+}
