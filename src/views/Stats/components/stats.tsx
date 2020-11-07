@@ -3,26 +3,17 @@ import { useHistory } from "react-router-dom";
 import firebase from "../../../firebase";
 import "firebase/firestore";
 
-import {
-  Grid,
-  Content,
-  Container,
-  FlexboxGrid,
-  Header,
-  Navbar,
-  Nav,
-  Dropdown,
-  Icon,
-  Table,
-} from "rsuite";
+import { Grid, Content, Container, FlexboxGrid, Table } from "rsuite";
 
 import SharedFooter from "../../Shared/footer";
+import SharedHeader from "../../Shared/header";
 import Logo from "../../../images/logo.png";
 
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
 const Stats = () => {
   const [userName, setUserName] = useState();
+  const [users, setUsers] = useState([]);
   const history = useHistory();
 
   const handleClick = (event: any) => {
@@ -44,51 +35,27 @@ const Stats = () => {
       .then((res) => {
         const user = res.data();
         if (user) {
+          // TODO set more data for the logged in user
           setUserName(user["username"]);
+          const userRef = db.collection("users").get();
+          userRef
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+              });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+          // Get the List of users
         }
       });
   }, []);
 
   return (
     <Container>
-      <Header>
-        <Navbar appearance="inverse">
-          <Navbar.Header>
-            <a className="navbar-brand logo">
-              <img src={Logo} alt="Logo" />
-            </a>
-          </Navbar.Header>
-          <Navbar.Body>
-            <Nav pullRight>
-              <Nav.Item>
-                <Icon icon="info" style={{ fontSize: 20 }} />
-              </Nav.Item>
-              <Nav.Item>
-                <Icon
-                  icon="home"
-                  style={{ fontSize: 20 }}
-                  onClick={() => history.push("/dashboard")}
-                />
-              </Nav.Item>
-              <Dropdown title={`Hola ${userName}`}>
-                {/* <Dropdown.Item>Company</Dropdown.Item> */}
-                <Dropdown.Item
-                  icon={<Icon icon="heart-o" />}
-                  onClick={() => history.push("/stats")}
-                >
-                  Estadisticas
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={handleClick}
-                  icon={<Icon icon="close" />}
-                >
-                  Cerrar sesión
-                </Dropdown.Item>
-              </Dropdown>
-            </Nav>
-          </Navbar.Body>
-        </Navbar>
-      </Header>
+      <SharedHeader />
       <Content style={{ paddingTop: 100 }}>
         <FlexboxGrid justify="center" className="login-middle">
           <FlexboxGrid.Item colspan={10}>

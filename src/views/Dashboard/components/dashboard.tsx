@@ -3,35 +3,14 @@ import { useHistory } from "react-router-dom";
 import firebase from "../../../firebase";
 import "firebase/firestore";
 
-import {
-  Grid,
-  Content,
-  Container,
-  FlexboxGrid,
-  Header,
-  Navbar,
-  Nav,
-  Dropdown,
-  Icon,
-} from "rsuite";
+import { Content, Container, FlexboxGrid } from "rsuite";
 import SharedFooter from "../../Shared/footer";
+import SharedHeader from "../../Shared/header";
 import DashboardImage from "../../../images/dashboard-img.png";
-import Logo from "../../../images/logo.png";
 
 const Dashboard = () => {
   const [userName, setUserName] = useState();
   const history = useHistory();
-
-  const handleClick = (event: any) => {
-    event.preventDefault();
-
-    firebase
-      .auth()
-      .signOut()
-      .then((res) => {
-        history.push("/auth/login");
-      });
-  };
 
   useEffect(() => {
     const db = firebase.firestore();
@@ -48,44 +27,7 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <Header>
-        <Navbar appearance="inverse">
-          <Navbar.Header>
-            <a className="navbar-brand logo">
-              <img src={Logo} alt="Logo" />
-            </a>
-          </Navbar.Header>
-          <Navbar.Body>
-            <Nav pullRight>
-              <Nav.Item>
-                <Icon icon="info" style={{ fontSize: 20 }} />
-              </Nav.Item>
-              <Nav.Item>
-                <Icon
-                  icon="home"
-                  style={{ fontSize: 20 }}
-                  onClick={() => history.push("/dashboard")}
-                />
-              </Nav.Item>
-              <Dropdown title={`Hola ${userName}`}>
-                {/* <Dropdown.Item>Company</Dropdown.Item> */}
-                <Dropdown.Item
-                  icon={<Icon icon="heart-o" />}
-                  onClick={() => history.push("/stats")}
-                >
-                  Estadisticas
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={handleClick}
-                  icon={<Icon icon="close" />}
-                >
-                  Cerrar sesión
-                </Dropdown.Item>
-              </Dropdown>
-            </Nav>
-          </Navbar.Body>
-        </Navbar>
-      </Header>
+      <SharedHeader />
       <Content style={{ paddingTop: 100 }}>
         <FlexboxGrid justify="center" align="middle" className="login-top">
           <FlexboxGrid.Item colspan={6}>
