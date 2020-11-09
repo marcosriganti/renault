@@ -57,7 +57,7 @@ const Stats = () => {
     page * displayLength,
     page * displayLength + displayLength
   );
-  console.log(users);
+  console.log(users, tableData);
   return (
     <Container>
       <SharedHeader />
@@ -69,7 +69,7 @@ const Stats = () => {
               <Table
                 virtualized
                 height={400}
-                data={tableData}
+                data={users}
                 onRowClick={(data) => {
                   console.log(data);
                 }}

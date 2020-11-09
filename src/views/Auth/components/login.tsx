@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import moment from "moment";
 import firebase from "../../../firebase";
 import "firebase/auth";
 import "firebase/firestore";
@@ -28,7 +29,7 @@ import { Input } from "rsuite";
 import SharedFooter from "../../Shared/footer";
 
 interface UserData {
-  email: string;
+  file: string;
   password: string;
 }
 
@@ -37,8 +38,8 @@ const Login = () => {
   const { loadingAuthState } = useContext(AuthContext);
   const history = useHistory();
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    file: "",
+    password: moment().format("YYYY-MM-DD"),
   } as UserData);
 
   const db = firebase.firestore();
@@ -96,24 +97,31 @@ const Login = () => {
     history.push("/dashboard");
   };
 
-  const handleClick = () => {
-    history.push("/auth/signup");
-  };
-
-  const handleChange = (event: any) => {
-    event.persist();
+  const handleChange = (event: any, val: string) => {
+    // event.persist();
     setValues((values) => ({
       ...values,
-      [event.target.name]: event.target.value,
+      file: val,
+    }));
+  };
+
+  const handleDateChange = (event: any, val: Date) => {
+    event.persist();
+    if (val == null) val = new Date();
+    setValues((values) => ({
+      ...values,
+      password: moment(val).format("YYYY-MM-DD"),
     }));
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-
+    const email = values.file + "@renault.com.ar";
+    const password = values.password;
+    console.log("handleSubmit", email, password);
     firebase
       .auth()
-      .signInWithEmailAndPassword(values.email, values.password)
+      .signInWithEmailAndPassword(email, password)
       .then((res) => {
         authContext.setUser(res);
         console.log(res, "res");
@@ -139,11 +147,6 @@ const Login = () => {
         provider = new firebase.auth.GoogleAuthProvider();
         console.log(provider, "gprovider");
         break;
-
-      //   case "Twitter":
-      //     provider = new firebase.auth.TwitterAuthProvider();
-      //     break;
-
       default:
         throw new Error("Unsupported SNS" + sns);
     }
@@ -182,34 +185,35 @@ const Login = () => {
             <p>Con tu legajo - Exclusivo colaboradores Renault</p>
             <Form>
               <FormGroup>
-                <ControlLabel>Email</ControlLabel>
+                <ControlLabel>Legajo</ControlLabel>
                 <div className="rs-form-control-wrapper">
                   <Input
-                    name="email"
-                    value={values.email}
-                    placeholder="Enter your Email"
-                    onChange={handleChange}
+                    name="file"
+                    type="text"
+                    value={values.file}
+                    placeholder="Ingresa tu legajo"
+                    onChange={(val, e) => handleChange(e, val)}
                   />
                 </div>
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Fecha de Nacimiento</ControlLabel>
-                {/* <DatePicker
+                <DatePicker
                   oneTap
                   style={{ width: 280 }}
                   format={"DD-MM-YYYY"}
-                  value={values.password}
-                  onChange={handleChange}
+                  value={new Date(values.password)}
+                  onChange={(val, e) => handleDateChange(e, val)}
                   // onChange={(date) => setPassword(date)}
-                /> */}
+                />
                 <div className="rs-form-control-wrapper">
-                  <Input
+                  {/* <Input
                     name="password"
-                    type="password"
+                    type="date"
                     value={values.password}
                     placeholder="Enter your password"
                     onChange={handleChange}
-                  />
+                  /> */}
                   <HelpBlock tooltip>Ejemplo: 11-10-1987</HelpBlock>
                 </div>
               </FormGroup>
