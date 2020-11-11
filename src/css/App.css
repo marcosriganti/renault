@@ -45,12 +45,12 @@ body {
 
 .login-top h1 {
   font-size: 70px;
-  ;
+  margin: 40px 0
 }
 
 .login-top img {
   max-width: 100%;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .legend {
@@ -71,6 +71,17 @@ body {
   ;
 }
 
+.body-text {
+  color: #8e8e93;
+
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.body-text p {
+  margin: 15px 0 20px;
+}
+
 .rs-btn-default {
   color: #383b41 !important;
   font-weight: bold;
@@ -83,9 +94,9 @@ body {
 .footer {
   padding: 15px;
   background-color: #fff;
-  position: fixed;
   bottom: 0;
   width: 100%;
+  margin-top: 50px;
   ;
 }
 
@@ -114,6 +125,10 @@ body {
 
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .rs-dropdown .rs-dropdown-menu {
