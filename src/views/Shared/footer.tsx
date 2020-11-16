@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from "rsuite";
-import { FlexboxGrid, Icon, Footer, Divider } from "rsuite";
+import { FlexboxGrid, Icon, Footer, Grid, Container } from "rsuite";
 import Gota from "../../images/gota.svg";
 
 const SharedFooter = () => {
@@ -11,64 +11,72 @@ const SharedFooter = () => {
   const [legal, setLegal] = useState(false);
   const [cookies, setCookies] = useState(false);
   return (
-    <div>
+    <>
       <Footer className="footer">
-        <FlexboxGrid justify="space-between">
-          <FlexboxGrid.Item colspan={6}>
-            {/* <Divider /> */}
-            <p>
+        <Grid>
+          <FlexboxGrid justify="space-between">
+            <FlexboxGrid.Item colspan={6}>
+              {/* <Divider /> */}
+              <p>
+                <a
+                  className="footer-link"
+                  href="#"
+                  onClick={(ev) => {
+                    ev.preventDefault();
+                    setPrivacy(true);
+                  }}
+                >
+                  Políticas de privacidad
+                </a>{" "}
+                | &nbsp;
+                <a
+                  href="#"
+                  className="footer-link"
+                  onClick={(ev) => {
+                    ev.preventDefault();
+                    setCookies(true);
+                  }}
+                >
+                  Cookies
+                </a>
+              </p>
+            </FlexboxGrid.Item>
+            <FlexboxGrid.Item colspan={3} className="social-links">
               <a
-                className="footer-link"
-                href="#"
-                onClick={(ev) => {
-                  ev.preventDefault();
-                  setPrivacy(true);
-                }}
+                href="https://www.facebook.com/RenaultArgentina"
+                target="_blank"
               >
-                Políticas de privacidad
-              </a>{" "}
-              | &nbsp;
-              <a
-                href="#"
-                className="footer-link"
-                onClick={(ev) => {
-                  ev.preventDefault();
-                  setCookies(true);
-                }}
-              >
-                Cookies
+                <Icon icon="facebook-official" />
               </a>
-            </p>
-          </FlexboxGrid.Item>
-          <FlexboxGrid.Item colspan={3} className="social-links">
-            <a href="https://www.facebook.com/RenaultArgentina" target="_blank">
-              <Icon icon="facebook-official" />
-            </a>
-            <a
-              href="https://www.instagram.com/renaultarg/?hl=es"
-              target="_blank"
-            >
-              <Icon icon="instagram" />
-            </a>
-            <a href="https://twitter.com/RenaultArg" target="_blank">
-              <Icon icon="twitter" />
-            </a>
-            <a href="https://www.linkedin.com/company/renault/" target="_blank">
-              <Icon icon="linkedin" />
-            </a>
+              <a
+                href="https://www.instagram.com/renaultarg/?hl=es"
+                target="_blank"
+              >
+                <Icon icon="instagram" />
+              </a>
+              <a href="https://twitter.com/RenaultArg" target="_blank">
+                <Icon icon="twitter" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/renault/"
+                target="_blank"
+              >
+                <Icon icon="linkedin" />
+              </a>
 
-            <a href="#" onClick={() => setGota(true)}>
-              <img
-                src={Gota}
-                alt="gota"
-                style={{
-                  width: 20,
-                  height: 20,
-                }}
-              ></img>
-            </a>
-          </FlexboxGrid.Item>
-        </FlexboxGrid>
+              <a href="#" onClick={() => setGota(true)}>
+                <img
+                  src={Gota}
+                  alt="gota"
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                ></img>
+              </a>
+            </FlexboxGrid.Item>
+          </FlexboxGrid>
+        </Grid>
       </Footer>
       <Modal size="md" show={gota} onHide={() => setGota(false)}>
         <Modal.Header>
@@ -466,7 +474,7 @@ const SharedFooter = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 };
 export default SharedFooter;
