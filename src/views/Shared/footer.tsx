@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Button, Modal } from "rsuite";
 import { FlexboxGrid, Icon, Footer, Divider } from "rsuite";
+import Gota from "../../images/gota.svg";
 
 const SharedFooter = () => {
   const [modal, setModal] = useState(false);
   const [privacy, setPrivacy] = useState(false);
+  const [gota, setGota] = useState(false);
 
   const [legal, setLegal] = useState(false);
   const [cookies, setCookies] = useState(false);
@@ -43,18 +45,70 @@ const SharedFooter = () => {
             </p>
           </FlexboxGrid.Item>
           <FlexboxGrid.Item colspan={3} className="social-links">
-            <a href="#">
+            <a
+              href="https://www.facebook.com/renaultespana/?brand_redir=138664326165739"
+              target="_blank"
+            >
               <Icon icon="facebook-official" />
             </a>
-            <a href="#">
+            <a
+              href="https://www.instagram.com/renaultarg/?hl=es"
+              target="_blank"
+            >
               <Icon icon="instagram" />
             </a>
-            <a href="#">
+            <a href="https://twitter.com/RenaultArg" target="_blank">
               <Icon icon="twitter" />
+            </a>
+            <a href="https://www.linkedin.com/company/renault/" target="_blank">
+              <Icon icon="linkedin" />
+            </a>
+
+            <a href="#" onClick={() => setGota(true)}>
+              <img
+                src={Gota}
+                alt="gota"
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+              ></img>
             </a>
           </FlexboxGrid.Item>
         </FlexboxGrid>
       </Footer>
+      <Modal size="md" show={gota} onHide={() => setGota(false)}>
+        <Modal.Header>
+          <Modal.Title>Realizado por Gota</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            {" "}
+            <img
+              src={Gota}
+              alt="gota"
+              style={{
+                width: 150,
+              }}
+            ></img>
+          </p>
+          <p>
+            La creatividad, diseño, ilustración y desarrollo de este juego fue
+            realizado por Gota, un estudio de comunicación profesional que
+            cuenta con un equipo creativo conformado por personas con
+            discapacidad intelectual.
+          </p>
+
+          <p>
+            <a href="http://www.somosgota.com">www.somosgota.com</a>
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => setGota(false)} appearance="subtle">
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Modal size="md" show={modal} onHide={() => setModal(false)}>
         <Modal.Header>
           <Modal.Title>Bases y Condiciones</Modal.Title>

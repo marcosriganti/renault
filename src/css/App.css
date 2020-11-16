@@ -155,3 +155,33 @@ body {
   height: 100vh;
   margin: 0;
 }
+
+.level img {
+  width: 100%;
+  filter: grayscale(90%);
+  transition: all 1s;
+
+}
+
+.level img:hover {
+  filter: grayscale(0%);
+}
+
+.level {
+  border-radius: 40px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 450px;
+  margin: 20px;
+  position: relative;
+}
+
+.level .content {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  z-index: 4;
+  text-align: center;
+  color: #fff;
+  ;
+}

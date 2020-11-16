@@ -9,6 +9,7 @@ import { AuthRoutes } from "../views/Auth";
 import PrivateRoute from "../PrivateRoute";
 import { StatsRoutes } from "../views/Stats";
 import { DashboardRoutes } from "../views/Dashboard";
+import { GameRoutes } from "../views/Game";
 // import { Dashboard } from "../views/Dashboard/components";
 
 const ApplicationRoutes = () => {
@@ -16,6 +17,7 @@ const ApplicationRoutes = () => {
     <Router>
       <Switch>
         <PrivateRoute exact path="/dashboard" component={DashboardRoutes} />
+        <PrivateRoute exact path="/game" component={GameRoutes} />
         <PrivateRoute exact path="/stats" component={StatsRoutes} />
         <Route path="/auth" component={AuthRoutes} />
         <Redirect to="/auth" from="/" />

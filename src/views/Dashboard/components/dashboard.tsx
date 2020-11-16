@@ -98,7 +98,9 @@ const Dashboard = () => {
                 <Icon icon="chevron-down" size={"2x"} />
               </p>
               <p>
-                <Button color="yellow">EMPEZAR A JUGAR</Button>
+                <Button color="yellow" onClick={() => history.push("/game")}>
+                  EMPEZAR A JUGAR
+                </Button>
               </p>
               <p>
                 <Button

@@ -73,7 +73,7 @@ const SharedHeader = () => {
                   icon={<Icon icon="heart-o" />}
                   onClick={() => history.push("/stats")}
                 >
-                  Estadisticas
+                  Estadísticas
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={handleClick}
@@ -95,14 +95,27 @@ const SharedHeader = () => {
           <Drawer.Title>Instrucciones</Drawer.Title>
         </Drawer.Header>
         <Drawer.Body>
-          <Paragraph />
-
-          <p>
-            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-            consectetur, adipisci velit, sed quia non numquam eius modi tempora
-            incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-          </p>
-          <Paragraph />
+          <ol>
+            <li>
+              Encontrá los objetos que pertenecen a la historia de la Planta
+              Santa Isabel y clickeá sobre ellos.
+            </li>
+            <li>Respondé una de las 3 opciones posibles.</li>
+            <li>Si acertás, ganas 10 puntos, si te equivocas restás 5.</li>
+            <li>
+              Podés cerrar sesión cuando quieras, y volver a ingresar con tu
+              usuario o redes sociales.
+            </li>
+            <li>
+              Mirá tus puntos en el botón{" "}
+              <Button
+                onClick={() => history.push("/stats")}
+                appearance="default"
+              >
+                Estadísticas
+              </Button>{" "}
+            </li>
+          </ol>
         </Drawer.Body>
         <Drawer.Footer style={{ paddingBottom: 20 }}>
           <Button onClick={() => sethsowDrawer(false)} color="yellow">
