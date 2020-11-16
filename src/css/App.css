@@ -145,3 +145,13 @@ body {
 .rs-navbar.rs-navbar-inverse .rs-navbar-header a.logo img {
   max-height: 45px;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}

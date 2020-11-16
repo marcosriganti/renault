@@ -86,13 +86,11 @@ const Dashboard = () => {
               con los negocios inclusivos, generando trabajo genuino para
               personas con discapacidad.
             </p>
-            <p>
-              ¡Encontrá los 65 objetos, reconocé su historia y disfrutá del
-              Universo Renault! (edited)
-            </p>
+
             <p className="text-center">
               <b>
-                Te invitamos a jugar con nosotros y repasar nuestra historia
+                ¡Encontrá los 65 objetos, reconocé su historia y disfrutá del
+                Universo Renault!
               </b>
             </p>
             <div className="text-center">
