@@ -185,3 +185,16 @@ body {
   color: #fff;
   ;
 }
+
+.rs-btn-default {
+  background: #e5e5ea;
+}
+
+.rs-btn-default:hover {
+  background-color: #C7C7D1;
+}
+
+.rs-timeline-item-dot::before,
+.rs-timeline-item-last .rs-timeline-item-dot::before {
+  background-color: #ffca28;
+}

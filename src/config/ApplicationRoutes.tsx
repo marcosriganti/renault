@@ -21,7 +21,6 @@ const ApplicationRoutes = () => {
         <PrivateRoute exact path="/stats" component={StatsRoutes} />
         <Route path="/auth" component={AuthRoutes} />
         <Redirect to="/auth" from="/" />
-        {/* <Route path="/" component={AuthRoutes} /> */}
       </Switch>
     </Router>
   );

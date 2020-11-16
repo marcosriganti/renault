@@ -8,12 +8,10 @@ import {
   Icon,
   Drawer,
   Button,
-  Placeholder,
+  Timeline,
 } from "rsuite";
 import Logo from "../../images/logo.png";
 import firebase from "../../firebase";
-
-const { Paragraph } = Placeholder;
 
 const SharedHeader = () => {
   const [userName, setUserName] = useState();
@@ -95,27 +93,31 @@ const SharedHeader = () => {
           <Drawer.Title>Instrucciones</Drawer.Title>
         </Drawer.Header>
         <Drawer.Body>
-          <ol>
-            <li>
+          <Timeline>
+            <Timeline.Item>
               Encontrá los objetos que pertenecen a la historia de la Planta
               Santa Isabel y clickeá sobre ellos.
-            </li>
-            <li>Respondé una de las 3 opciones posibles.</li>
-            <li>Si acertás, ganas 10 puntos, si te equivocas restás 5.</li>
-            <li>
+            </Timeline.Item>
+            <Timeline.Item>
+              Respondé una de las 3 opciones posibles.
+            </Timeline.Item>
+            <Timeline.Item>
+              Si acertás, ganas 10 puntos, si te equivocas restás 5.
+            </Timeline.Item>
+            <Timeline.Item>
               Podés cerrar sesión cuando quieras, y volver a ingresar con tu
               usuario o redes sociales.
-            </li>
-            <li>
+            </Timeline.Item>
+            <Timeline.Item>
               Mirá tus puntos en el botón{" "}
               <Button
                 onClick={() => history.push("/stats")}
                 appearance="default"
               >
                 Estadísticas
-              </Button>{" "}
-            </li>
-          </ol>
+              </Button>
+            </Timeline.Item>
+          </Timeline>
         </Drawer.Body>
         <Drawer.Footer style={{ paddingBottom: 20 }}>
           <Button onClick={() => sethsowDrawer(false)} color="yellow">

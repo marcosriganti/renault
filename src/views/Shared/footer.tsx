@@ -17,10 +17,6 @@ const SharedFooter = () => {
           <FlexboxGrid.Item colspan={6}>
             {/* <Divider /> */}
             <p>
-              <Button onClick={() => setModal(true)}>
-                Leer bases y condiciones
-              </Button>{" "}
-              &nbsp;
               <a
                 className="footer-link"
                 href="#"
@@ -45,10 +41,7 @@ const SharedFooter = () => {
             </p>
           </FlexboxGrid.Item>
           <FlexboxGrid.Item colspan={3} className="social-links">
-            <a
-              href="https://www.facebook.com/renaultespana/?brand_redir=138664326165739"
-              target="_blank"
-            >
+            <a href="https://www.facebook.com/RenaultArgentina" target="_blank">
               <Icon icon="facebook-official" />
             </a>
             <a
