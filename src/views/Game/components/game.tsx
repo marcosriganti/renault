@@ -71,7 +71,14 @@ const Game = () => {
             {images.map((image, index) => {
               return (
                 <Col xs={24} md={12} className="text-left">
-                  <div className="level">
+                  <a
+                    className="level"
+                    href={`/game/level/${index + 1}`}
+                    onClick={(ev) => {
+                      ev.preventDefault();
+                      return false;
+                    }}
+                  >
                     <div className="image">
                       <img src={image} alt="Nivel 1"></img>
                     </div>
@@ -79,16 +86,19 @@ const Game = () => {
                       <div className="name">
                         <h3>Nivel {index + 1}</h3>
                       </div>
-                      <Line
-                        percent={30}
-                        status="active"
-                        strokeColor={"#ffca28"}
-                        style={{ margin: 20 }}
-                      />
-
-                      <h3>5/10</h3>
+                      <div className="info">
+                        <h3>5/10</h3>
+                        <div className="progress">
+                          <Line
+                            percent={30}
+                            status="active"
+                            strokeColor={"#ffca28"}
+                            showInfo={false}
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </Col>
               );
             })}

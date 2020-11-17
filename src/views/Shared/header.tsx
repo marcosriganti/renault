@@ -15,7 +15,7 @@ import firebase from "../../firebase";
 
 const SharedHeader = () => {
   const [userName, setUserName] = useState();
-  const [showDrawer, sethsowDrawer] = useState(false);
+  const [showDrawer, setDrawer] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const SharedHeader = () => {
           </Navbar.Header>
           <Navbar.Body>
             <Nav pullRight>
-              <Nav.Item onClick={() => sethsowDrawer(true)}>
+              <Nav.Item onClick={() => setDrawer(true)}>
                 <Icon icon="info" style={{ fontSize: 20 }} />
               </Nav.Item>
               <Nav.Item>
@@ -84,11 +84,7 @@ const SharedHeader = () => {
           </Navbar.Body>
         </Navbar>
       </Header>
-      <Drawer
-        backdrop={true}
-        show={showDrawer}
-        onHide={() => sethsowDrawer(false)}
-      >
+      <Drawer backdrop={true} show={showDrawer} onHide={() => setDrawer(false)}>
         <Drawer.Header>
           <Drawer.Title>Instrucciones</Drawer.Title>
         </Drawer.Header>
@@ -111,7 +107,10 @@ const SharedHeader = () => {
             <Timeline.Item>
               Mirá tus puntos en el botón{" "}
               <Button
-                onClick={() => history.push("/stats")}
+                onClick={() => {
+                  history.push("/stats");
+                  setDrawer(false);
+                }}
                 appearance="default"
               >
                 Estadísticas
@@ -120,7 +119,7 @@ const SharedHeader = () => {
           </Timeline>
         </Drawer.Body>
         <Drawer.Footer style={{ paddingBottom: 20 }}>
-          <Button onClick={() => sethsowDrawer(false)} color="yellow">
+          <Button onClick={() => setDrawer(false)} color="yellow">
             Listo, entendí!
           </Button>
         </Drawer.Footer>

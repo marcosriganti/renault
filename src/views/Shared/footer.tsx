@@ -8,7 +8,6 @@ const SharedFooter = () => {
   const [privacy, setPrivacy] = useState(false);
   const [gota, setGota] = useState(false);
 
-  const [legal, setLegal] = useState(false);
   const [cookies, setCookies] = useState(false);
   return (
     <>
@@ -16,21 +15,20 @@ const SharedFooter = () => {
         <Grid>
           <FlexboxGrid justify="space-between">
             <FlexboxGrid.Item colspan={6}>
-              {/* <Divider /> */}
               <p>
-                <a
+                <Button
+                  appearance="subtle"
                   className="footer-link"
-                  href="#"
                   onClick={(ev) => {
                     ev.preventDefault();
                     setPrivacy(true);
                   }}
                 >
                   Políticas de privacidad
-                </a>{" "}
-                | &nbsp;
-                <a
-                  href="#"
+                </Button>
+                {` | `}
+                <Button
+                  appearance="subtle"
                   className="footer-link"
                   onClick={(ev) => {
                     ev.preventDefault();
@@ -38,19 +36,21 @@ const SharedFooter = () => {
                   }}
                 >
                   Cookies
-                </a>
+                </Button>
               </p>
             </FlexboxGrid.Item>
             <FlexboxGrid.Item colspan={3} className="social-links">
               <a
                 href="https://www.facebook.com/RenaultArgentina"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <Icon icon="facebook-official" />
               </a>
               <a
                 href="https://www.instagram.com/renaultarg/?hl=es"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <Icon icon="instagram" />
               </a>
@@ -60,6 +60,7 @@ const SharedFooter = () => {
               <a
                 href="https://www.linkedin.com/company/renault/"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <Icon icon="linkedin" />
               </a>
@@ -414,25 +415,39 @@ const SharedFooter = () => {
           <p>
             Renault y sus sociedades vinculadas pueden usar "cookies" para
             rastrear preferencias de usuarios, alcanzar un mejor diseño de su
-            sitio web y procurar una navegación más ágil. También podrán ser
-            utilizadas para realizar en el futuro campañas publicitarias
-            tendientes a mantener actualizado al usuario sobre nuevos productos,
-            promociones y/o distintos servicios que ofrezca por si, o a través
-            de terceras personas.Los cookies permiten adaptar el contenido de
-            nuestras páginas de Internet a sus necesidades específicas y así
-            también mejorar el servicio que le ofrecemos. Las cookies también
-            pueden ser usadas para determinar si una conexión ya ha sido hecha
-            de su ordenador a nuestros sitios. Desde luego, usted también puede
-            ver nuestro sitio web sin ninguna "cookie". La mayoría de los
-            navegadores aceptan "cookies" automáticamente. Usted puede impedir
-            el uso de "cookies" seleccionando la opción “no aceptar cookies” de
-            su explorador. También puede visitar www.aboutcookies.org, que
-            contiene información detallada de cómo hacerlo en una amplia
+            sitio web y procurar una navegación más ágil.
+          </p>
+          <p>
+            También podrán ser utilizadas para realizar en el futuro campañas
+            publicitarias tendientes a mantener actualizado al usuario sobre
+            nuevos productos, promociones y/o distintos servicios que ofrezca
+            por si, o a través de terceras personas.
+          </p>
+          <p>
+            Los cookies permiten adaptar el contenido de nuestras páginas de
+            Internet a sus necesidades específicas y así también mejorar el
+            servicio que le ofrecemos. Las cookies también pueden ser usadas
+            para determinar si una conexión ya ha sido hecha de su ordenador a
+            nuestros sitios. Desde luego, usted también puede ver nuestro sitio
+            web sin ninguna "cookie".
+          </p>
+          <p>
+            La mayoría de los navegadores aceptan "cookies" automáticamente.
+            Usted puede impedir el uso de "cookies" seleccionando la opción “no
+            aceptar cookies” de su explorador. También puede visitar
+            <a
+              href="http://www.aboutcookies.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              www.aboutcookies.org
+            </a>
+            , que contiene información detallada de cómo hacerlo en una amplia
             variedad de navegadores.
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => setCookies(false)} appearance="subtle">
+          <Button onClick={() => setCookies(false)} appearance="default">
             Cerrar
           </Button>
         </Modal.Footer>

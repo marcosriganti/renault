@@ -164,35 +164,6 @@ body,
   margin: 0;
 }
 
-.level img {
-  width: 100%;
-  filter: grayscale(90%);
-  transition: all 1s;
-
-}
-
-.level img:hover {
-  filter: grayscale(0%);
-}
-
-.level {
-  border-radius: 40px;
-  overflow: hidden;
-  width: 100%;
-  max-width: 450px;
-  margin: 20px;
-  position: relative;
-}
-
-.level .content {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  z-index: 4;
-  text-align: center;
-  color: #fff;
-  ;
-}
 
 .rs-btn-default {
   background: #e5e5ea;
@@ -205,4 +176,54 @@ body,
 .rs-timeline-item-dot::before,
 .rs-timeline-item-last .rs-timeline-item-dot::before {
   background-color: #ffca28;
+}
+
+/* Levels */
+
+.level {
+  display: block;
+}
+
+.level img {
+  width: 100%;
+  filter: grayscale(90%);
+  transition: all 1s;
+
+}
+
+.level:hover img {
+  filter: grayscale(0%);
+}
+
+.level {
+  border-radius: 40px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 450px;
+  margin: 20px;
+  position: relative;
+}
+
+.level .progress {
+  width: 70%;
+  margin: auto
+}
+
+.level .info h3 {
+  font-size: 42px;
+}
+
+.level .content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  z-index: 4;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(151, 151, 151, 0.7);
 }
