@@ -18,6 +18,11 @@ const ApplicationRoutes = () => {
       <Switch>
         <PrivateRoute exact path="/dashboard" component={DashboardRoutes} />
         <PrivateRoute exact path="/game" component={GameRoutes} />
+        <PrivateRoute
+          exact
+          path="/game/level/:levelId"
+          component={GameRoutes}
+        />
         <PrivateRoute exact path="/stats" component={StatsRoutes} />
         <Route path="/auth" component={AuthRoutes} />
         <Redirect to="/auth" from="/" />

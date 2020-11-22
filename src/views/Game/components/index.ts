@@ -1,3 +1,4 @@
+import Level from "./level";
 import Game from "./game";
 
-export { Game };
+export { Game, Level };
