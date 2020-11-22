@@ -72,8 +72,11 @@ const Login = () => {
     db.collection("users")
       .doc(currentUser.uid)
       .set({
+        displayName: currentUser.displayName,
         username: currentUser.displayName,
         email: currentUser.email,
+        photoURL: currentUser.photoURL,
+        uid: currentUser.uid,
       })
       .then(() => {
         console.log("Saved");
@@ -118,7 +121,6 @@ const Login = () => {
     event.preventDefault();
     const email = values.file + "@renault.com.ar";
     const password = values.password;
-    console.log("handleSubmit", email, password);
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -204,16 +206,8 @@ const Login = () => {
                   format={"DD-MM-YYYY"}
                   value={new Date(values.password)}
                   onChange={(val, e) => handleDateChange(e, val)}
-                  // onChange={(date) => setPassword(date)}
                 />
                 <div className="rs-form-control-wrapper">
-                  {/* <Input
-                    name="password"
-                    type="date"
-                    value={values.password}
-                    placeholder="Enter your password"
-                    onChange={handleChange}
-                  /> */}
                   <HelpBlock tooltip>Ejemplo: 11-10-1987</HelpBlock>
                 </div>
               </FormGroup>

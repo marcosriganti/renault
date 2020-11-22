@@ -14,21 +14,38 @@ import Logo from "../../images/logo.png";
 import firebase from "../../firebase";
 
 const SharedHeader = () => {
-  const [userName, setUserName] = useState();
+  const [userName, setUserName] = useState("");
   const [showDrawer, setDrawer] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
-    const db = firebase.firestore();
-    db.collection("users")
-      .doc(firebase.auth().currentUser!.uid)
-      .get()
-      .then((res) => {
-        const user = res.data();
-        if (user) {
-          setUserName(user["username"]);
-        }
-      });
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        // console.log("getting user", user);
+        setUserName(
+          user.displayName
+            .toLowerCase()
+            .split(" ")
+            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(" ")
+        );
+      } else {
+        // No user is signed in.
+      }
+    });
+
+    // const db = firebase.firestore();
+    // db.collection("users")
+    //   .doc(firebase.auth().currentUser!.uid)
+    //   .get()
+    //   .then((res) => {
+    //     const user = res.data();
+    //     console.log("getting user", user);
+    //     if (user) {
+    //       setUserName(user["displayName"]);
+    //     }
+    //   });
   }, []);
 
   const handleClick = (event: any) => {
