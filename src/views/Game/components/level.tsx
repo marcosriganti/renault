@@ -47,6 +47,10 @@ const Level = () => {
               db.collection("users").doc(user.uid).update({
                 level,
               });
+
+            if (level < parseInt(levelId)) {
+              history.push("/game");
+            }
           });
       } else {
         // No user is signed in.

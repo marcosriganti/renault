@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal } from "rsuite";
 import { FlexboxGrid, Icon, Footer, Grid, Container } from "rsuite";
 import Gota from "../../images/gota.svg";
+import GotaModal from "../../images/gota_modal.svg";
 
 const SharedFooter = () => {
   const [modal, setModal] = useState(false);
@@ -39,7 +40,7 @@ const SharedFooter = () => {
                 </Button>
               </p>
             </FlexboxGrid.Item>
-            <FlexboxGrid.Item colspan={3} className="social-links">
+            <FlexboxGrid.Item colspan={4} className="social-links">
               <a
                 href="https://www.facebook.com/RenaultArgentina"
                 target="_blank"
@@ -70,7 +71,7 @@ const SharedFooter = () => {
                   src={Gota}
                   alt="gota"
                   style={{
-                    width: 20,
+                    width: 40,
                     height: 20,
                   }}
                 ></img>
@@ -79,18 +80,17 @@ const SharedFooter = () => {
           </FlexboxGrid>
         </Grid>
       </Footer>
-      <Modal size="md" show={gota} onHide={() => setGota(false)}>
+      <Modal size="sm" show={gota} onHide={() => setGota(false)}>
         <Modal.Header>
           <Modal.Title>Realizado por Gota</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="text-center">
           <p>
-            {" "}
             <img
-              src={Gota}
+              src={GotaModal}
               alt="gota"
               style={{
-                width: 150,
+                width: 200,
               }}
             ></img>
           </p>
@@ -102,11 +102,17 @@ const SharedFooter = () => {
           </p>
 
           <p>
-            <a href="http://www.somosgota.com">www.somosgota.com</a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="http://www.somosgota.com"
+            >
+              www.somosgota.com
+            </a>
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => setGota(false)} appearance="subtle">
+          <Button onClick={() => setGota(false)} appearance="default">
             Cerrar
           </Button>
         </Modal.Footer>
