@@ -22,7 +22,6 @@ const Dashboard = () => {
   const history = useHistory();
 
   useEffect(() => {
-    const db = firebase.firestore();
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // User is signed in.
@@ -31,18 +30,7 @@ const Dashboard = () => {
         // No user is signed in.
       }
     });
-    console.log("currentUser", firebase.auth().currentUser);
     setUserName(firebase.auth().currentUser.displayName);
-    // db.collection("users")
-    //   .doc(firebase.auth().currentUser!.uid)
-    //   .get()
-    //   .then((res) => {
-    //     const user = res.data();
-    //     console.log("user", user);
-    //     if (user) {
-    //       setUserName(user["username"]);
-    //     }
-    //   });
   }, []);
 
   return (

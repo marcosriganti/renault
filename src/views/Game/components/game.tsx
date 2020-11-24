@@ -3,17 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import "firebase/firestore";
 
-import {
-  Content,
-  Container,
-  FlexboxGrid,
-  Icon,
-  Button,
-  Grid,
-  Row,
-  Col,
-  Progress,
-} from "rsuite";
+import { Content, Container, Icon, Grid, Row, Col, Progress } from "rsuite";
 
 import firebase from "../../../firebase";
 import SharedFooter from "../../Shared/footer";
@@ -30,7 +20,6 @@ const questions = [10, 12, 18, 25];
 const Game = () => {
   const images = [Level1, Level2, Level3, Level4];
   const [level, setLevel] = useState(1);
-  const history = useHistory();
 
   console.log("Getting into Game ");
   useEffect(() => {

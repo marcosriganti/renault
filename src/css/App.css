@@ -130,6 +130,10 @@ body {
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .text-right {
   text-align: right;
 }
@@ -226,4 +230,41 @@ body,
   text-align: center;
   color: #fff;
   background-color: rgba(151, 151, 151, 0.7);
+}
+
+.game-board {
+  position: relative;
+  margin: auto;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.game-board img {
+  width: 100%;
+}
+
+.image-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+}
+
+.level-info {
+  color: #fff;
+  border-left: 4px solid #FEC00F;
+  padding-left: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.level-info p {
+  margin: 5px 0;
+}
+
+.rs-radio-checked .rs-radio-wrapper .rs-radio-inner::before {
+  border-color: #FEC00F;
+  background-color: #FEC00F;
 }
