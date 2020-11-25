@@ -268,3 +268,11 @@ body,
   border-color: #FEC00F;
   background-color: #FEC00F;
 }
+
+.error {
+  color: #ce2d24;
+}
+
+.done {
+  color: #3aac4e;
+}

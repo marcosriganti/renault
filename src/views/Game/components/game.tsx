@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-
+import { AuthContext } from "../../../AuthProvider";
 import "firebase/firestore";
 
 import { Content, Container, Icon, Grid, Row, Col, Progress } from "rsuite";
@@ -18,30 +18,43 @@ const { Line } = Progress;
 const questions = [10, 12, 18, 25];
 
 const Game = () => {
+  const authContext = useContext(AuthContext);
   const images = [Level1, Level2, Level3, Level4];
   const [level, setLevel] = useState(1);
+  const [levels, setLevels] = useState({
+    1: {
+      answeredCount: 0,
+      total: 10,
+      answered: [],
+    },
+  });
+
+  const user = authContext.user;
 
   console.log("Getting into Game ");
   useEffect(() => {
     const db = firebase.firestore();
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        db.collection("users")
-          .doc(user.uid)
-          .get()
-          .then((res) => {
-            const userDoc = res.data();
-            console.log("user found", userDoc);
+    if (user) {
+      console.log(user);
+      db.collection("users")
+        .where("uid", "==", user.uid)
+        // .doc(user.uid)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            const userDoc = doc.data();
             if (userDoc.level) setLevel(userDoc.level);
+            if (userDoc.levels) setLevels(userDoc.levels);
             else
-              db.collection("users").doc(user.uid).update({
+              db.collection("users").doc(doc.id).update({
                 level,
+                levels,
               });
           });
-      } else {
-        // No user is signed in.
-      }
-    });
+        });
+    } else {
+      // No user is signed in.
+    }
   }, []);
 
   return (
@@ -91,10 +104,16 @@ const Game = () => {
                         </>
                       ) : (
                         <div className="info">
-                          <h3>5/{questions[index]}</h3>
+                          <h3>
+                            {levels[index + 1].answered.length}/
+                            {questions[index]}
+                          </h3>
                           <div className="progress">
                             <Line
-                              percent={30}
+                              percent={
+                                (levels[index + 1].answered.length * 100) /
+                                questions[index]
+                              }
                               status="active"
                               strokeColor={"#ffca28"}
                               showInfo={false}

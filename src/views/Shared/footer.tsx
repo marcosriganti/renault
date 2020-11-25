@@ -71,8 +71,8 @@ const SharedFooter = () => {
                   src={Gota}
                   alt="gota"
                   style={{
-                    width: 40,
-                    height: 20,
+                    width: 70,
+                    height: 30,
                   }}
                 ></img>
               </a>
