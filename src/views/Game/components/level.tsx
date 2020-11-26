@@ -49,6 +49,7 @@ const Level = () => {
   const [docID, setDocID] = useState(null);
   const [level, setLevel] = useState(1);
   const [points, setPoints] = useState(0);
+  const [levelComplete, setLevelComplete] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [answer, setAnswer] = useState("");
   const [levels, setLevels] = useState({
@@ -101,10 +102,10 @@ const Level = () => {
                 points,
               });
 
-            // if (level < parseInt(levelId)) {
-            //   history.push("/game");
-            //   return;
-            // }
+            if (userDoc.level < parseInt(levelId)) {
+              history.push("/game");
+              return;
+            }
             // get questions
             let qs = {};
             const questionsRef = db.collection("questions");
@@ -126,6 +127,7 @@ const Level = () => {
 
   const process = () => {
     let newLevels = levels;
+    let newLevel = level;
     const num = questions[currentQuestion].num;
     let newPoints = points;
     setAnswered(true);
@@ -136,14 +138,23 @@ const Level = () => {
     } else {
       newPoints -= 5;
       Alert.error("-5 pts.", 5000);
-      // newLevels[levelId].answeredWrong.push(num);
     }
     setPoints(newPoints);
     setLevels(newLevels);
-    console.log("docID", docID);
+
+    if (
+      newLevels[levelId].answered.length === newLevels[levelId].total &&
+      parseInt(levelId) === level &&
+      level < 4
+    ) {
+      newLevel = level + 1;
+      setLevel(newLevel);
+    }
+
     db.collection("users").doc(docID).update({
       levels: newLevels,
       points: newPoints,
+      level: newLevel,
     });
   };
   const checkObject = (num) => {
@@ -155,6 +166,10 @@ const Level = () => {
   const close = () => {
     setCurrentQuestion("");
     setAnswered(false);
+    if (levels[levelId].answered.length === levels[levelId].total) {
+      // Show Next
+      setLevelComplete(true);
+    }
   };
 
   return (
@@ -203,6 +218,28 @@ const Level = () => {
         </Content>
         <SharedFooter />
       </Container>
+      <Modal size="sm" show={levelComplete} onHide={close}>
+        <Modal.Header>
+          <Modal.Title>Increible!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          <h2 className="done">Desbloqueaste el Nivel {level}!</h2>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            color="yellow"
+            onClick={() => {
+              history.push(`/game/level/${level}`);
+              setLevelComplete(false);
+            }}
+          >
+            Ir al Nivel {level}
+          </Button>
+          <Button onClick={() => setLevelComplete(false)} appearance="default">
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Modal size="sm" show={currentQuestion !== ""} onHide={close}>
         <Modal.Header>
           <Modal.Title>Pregunta</Modal.Title>

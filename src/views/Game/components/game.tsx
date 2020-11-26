@@ -18,6 +18,7 @@ const { Line } = Progress;
 
 const Game = () => {
   const authContext = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
   const images = [Level1, Level2, Level3, Level4];
   const [level, setLevel] = useState(1);
   const [levels, setLevels] = useState({
@@ -44,6 +45,7 @@ const Game = () => {
   });
 
   const user = authContext.user;
+
   useEffect(() => {
     const db = firebase.firestore();
     if (user) {
@@ -54,20 +56,22 @@ const Game = () => {
           querySnapshot.forEach(function (doc) {
             const userDoc = doc.data();
             if (userDoc.level) setLevel(userDoc.level);
-            if (userDoc.levels)
-              setLevels(Object.assign(levels, userDoc.levels));
-            else
+            if (userDoc.levels) {
+              const newLevels = Object.assign(levels, userDoc.levels);
+              setLevels(newLevels);
+            } else
               db.collection("users").doc(doc.id).update({
                 level,
                 levels,
               });
           });
+          setLoading(false);
         });
     } else {
       // No user is signed in.
     }
   }, []);
-
+  if (loading) return <></>;
   return (
     <Container>
       <SharedHeader />
