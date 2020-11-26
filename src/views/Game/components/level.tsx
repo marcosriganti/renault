@@ -26,6 +26,7 @@ import Level4Image from "../../../images/levels/level4.jpg";
 import { Level1 as Level1SVG } from "./level1";
 import { Level2 as Level2SVG } from "./level2";
 import { Level3 as Level3SVG } from "./level3";
+import { Level4 as Level4SVG } from "./level4";
 
 import { AuthContext } from "../../../AuthProvider";
 
@@ -189,6 +190,11 @@ const Level = () => {
               )}
               {levelId === "3" ? (
                 <Level3SVG callback={checkObject}></Level3SVG>
+              ) : (
+                ``
+              )}
+              {levelId === "4" ? (
+                <Level4SVG callback={checkObject}></Level4SVG>
               ) : (
                 ``
               )}

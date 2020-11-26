@@ -10,7 +10,7 @@ export const Level3 = (props) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1927.56 1077.17">
       <defs></defs>
-      <title>Mesa de trabajo 1 copia</title>
+      <title></title>
       <g id="Capa_30" data-name="Capa 30">
         <path
           onClick={onClick}
