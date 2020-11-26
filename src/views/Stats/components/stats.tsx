@@ -27,7 +27,7 @@ const Stats = () => {
         const user = res.data();
         if (user) {
           // TODO set more data for the logged in user
-          setUserName(user["username"]);
+          // setUserName(user["username"]);
           const userRef = db.collection("users").limit(30).get();
           userRef
             .then(function (querySnapshot) {

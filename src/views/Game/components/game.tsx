@@ -15,7 +15,6 @@ import Level3 from "../../../images/nivel 3_400.jpg";
 import Level4 from "../../../images/nivel 4_400.jpg";
 
 const { Line } = Progress;
-const questions = [10, 12, 18, 25];
 
 const Game = () => {
   const authContext = useContext(AuthContext);
@@ -27,24 +26,36 @@ const Game = () => {
       total: 10,
       answered: [],
     },
+    2: {
+      answeredCount: 0,
+      total: 12,
+      answered: [],
+    },
+    3: {
+      answeredCount: 0,
+      total: 18,
+      answered: [],
+    },
+    4: {
+      answeredCount: 0,
+      total: 25,
+      answered: [],
+    },
   });
 
   const user = authContext.user;
-
-  console.log("Getting into Game ");
   useEffect(() => {
     const db = firebase.firestore();
     if (user) {
-      console.log(user);
       db.collection("users")
         .where("uid", "==", user.uid)
-        // .doc(user.uid)
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
             const userDoc = doc.data();
             if (userDoc.level) setLevel(userDoc.level);
-            if (userDoc.levels) setLevels(userDoc.levels);
+            if (userDoc.levels)
+              setLevels(Object.assign(levels, userDoc.levels));
             else
               db.collection("users").doc(doc.id).update({
                 level,
@@ -99,20 +110,20 @@ const Game = () => {
                         <>
                           <Icon icon="lock" size={"5x"} />
                           <div className="info">
-                            <h3>0/{questions[index]}</h3>
+                            <h3>0/{levels[index + 1].total}</h3>
                           </div>
                         </>
                       ) : (
                         <div className="info">
                           <h3>
                             {levels[index + 1].answered.length}/
-                            {questions[index]}
+                            {levels[index + 1].total}
                           </h3>
                           <div className="progress">
                             <Line
                               percent={
                                 (levels[index + 1].answered.length * 100) /
-                                questions[index]
+                                levels[index + 1].total
                               }
                               status="active"
                               strokeColor={"#ffca28"}

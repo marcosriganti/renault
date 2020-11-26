@@ -18,8 +18,14 @@ import firebase from "../../../firebase";
 import SharedFooter from "../../Shared/footer";
 import SharedHeader from "../../Shared/header";
 import Level1Image from "../../../images/levels/level1.jpg";
+import Level2Image from "../../../images/levels/level2.jpg";
+
 import { Level1 as Level1SVG } from "./level1";
+
+import { Level2 as Level2SVG } from "./level2";
+
 import { AuthContext } from "../../../AuthProvider";
+
 const db = firebase.firestore();
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -30,6 +36,7 @@ const shuffleArray = (array) => {
 
 const LevelImages = {
   1: Level1Image,
+  2: Level2Image,
 };
 const Level = () => {
   const authContext = useContext(AuthContext);
@@ -42,6 +49,21 @@ const Level = () => {
     1: {
       answeredCount: 0,
       total: 10,
+      answered: [],
+    },
+    2: {
+      answeredCount: 0,
+      total: 12,
+      answered: [],
+    },
+    3: {
+      answeredCount: 0,
+      total: 18,
+      answered: [],
+    },
+    4: {
+      answeredCount: 0,
+      total: 25,
       answered: [],
     },
   });
@@ -62,7 +84,8 @@ const Level = () => {
           querySnapshot.forEach(function (doc) {
             const userDoc = doc.data();
             setDocID(doc.id);
-            if (userDoc.levels) setLevels(userDoc.levels);
+            if (userDoc.levels)
+              setLevels(Object.assign(levels, userDoc.levels));
             if (userDoc.level) setLevel(userDoc.level);
             if (userDoc.points) setPoints(userDoc.points);
             else
@@ -72,10 +95,10 @@ const Level = () => {
                 points,
               });
 
-            if (level < parseInt(levelId)) {
-              history.push("/game");
-              return;
-            }
+            // if (level < parseInt(levelId)) {
+            //   history.push("/game");
+            //   return;
+            // }
             // get questions
             let qs = {};
             const questionsRef = db.collection("questions");
@@ -93,7 +116,6 @@ const Level = () => {
           });
         });
     }
-    // });
   }, []);
 
   const process = () => {
@@ -150,7 +172,16 @@ const Level = () => {
           <div className="game-board">
             <img src={LevelImages[levelId]} alt="" className="game-img"></img>
             <div className="image-svg">
-              <Level1SVG callback={checkObject}></Level1SVG>
+              {levelId === "1" ? (
+                <Level1SVG callback={checkObject}></Level1SVG>
+              ) : (
+                ``
+              )}
+              {levelId === "2" ? (
+                <Level2SVG callback={checkObject}></Level2SVG>
+              ) : (
+                ``
+              )}
             </div>
           </div>
         </Content>
