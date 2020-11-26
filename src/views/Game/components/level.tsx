@@ -17,12 +17,15 @@ import {
 import firebase from "../../../firebase";
 import SharedFooter from "../../Shared/footer";
 import SharedHeader from "../../Shared/header";
+
 import Level1Image from "../../../images/levels/level1.jpg";
 import Level2Image from "../../../images/levels/level2.jpg";
+import Level3Image from "../../../images/levels/level3.jpg";
+import Level4Image from "../../../images/levels/level4.jpg";
 
 import { Level1 as Level1SVG } from "./level1";
-
 import { Level2 as Level2SVG } from "./level2";
+import { Level3 as Level3SVG } from "./level3";
 
 import { AuthContext } from "../../../AuthProvider";
 
@@ -37,6 +40,8 @@ const shuffleArray = (array) => {
 const LevelImages = {
   1: Level1Image,
   2: Level2Image,
+  3: Level3Image,
+  4: Level4Image,
 };
 const Level = () => {
   const authContext = useContext(AuthContext);
@@ -103,7 +108,7 @@ const Level = () => {
             let qs = {};
             const questionsRef = db.collection("questions");
             questionsRef
-              .where("level", "==", level)
+              .where("level", "==", parseInt(levelId))
               .get()
               .then((snapshot) => {
                 snapshot.forEach((q) => {
@@ -179,6 +184,11 @@ const Level = () => {
               )}
               {levelId === "2" ? (
                 <Level2SVG callback={checkObject}></Level2SVG>
+              ) : (
+                ``
+              )}
+              {levelId === "3" ? (
+                <Level3SVG callback={checkObject}></Level3SVG>
               ) : (
                 ``
               )}
