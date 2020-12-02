@@ -7,12 +7,13 @@ import { Grid, Content, Container, FlexboxGrid, Table } from "rsuite";
 
 import SharedFooter from "../../Shared/footer";
 import SharedHeader from "../../Shared/header";
-import Logo from "../../../images/logo.png";
+import Loading from "../../Shared/loading";
 
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
 const Stats = () => {
   const [userName, setUserName] = useState();
+  const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const history = useHistory();
   const [page, setPage] = useState(0);
@@ -28,22 +29,40 @@ const Stats = () => {
         if (user) {
           // TODO set more data for the logged in user
           // setUserName(user["username"]);
-          const userRef = db.collection("users").limit(30).get();
+          const userRef = db
+            .collection("users")
+            .orderBy("points", "desc")
+            .limit(30)
+            .get();
+
           userRef
             .then(function (querySnapshot) {
+              let counter = 1;
               querySnapshot.forEach(function (doc) {
                 // doc.data() is never undefined for query doc snapshots
+                const userData = doc.data();
+
+                const { levels } = userData.levels;
+                let questions = 0;
+                if (userData.levels) {
+                  console.log(userData.levels);
+                  Object.keys(userData.levels).map((key) => {
+                    const lvl = userData.levels[key];
+                    questions += lvl.answered.length;
+                  });
+                }
+
                 const user = {
-                  id: doc.id,
-                  points: 0,
-                  level: 1,
-                  questions: 0,
                   ...doc.data(),
+                  id: counter,
+                  answers: questions + "/65",
                 };
+                counter++;
                 let newUsers = users;
                 newUsers.push(user);
                 setUsers(newUsers);
               });
+              setLoading(false);
             })
             .catch(function (error) {
               console.log("Error getting documents: ", error);
@@ -53,6 +72,9 @@ const Stats = () => {
         }
       });
   }, []);
+
+  if (loading) return <Loading />;
+
   const tableData = users.slice(
     page * displayLength,
     page * displayLength + displayLength
@@ -68,7 +90,8 @@ const Stats = () => {
             <div>
               <Table
                 virtualized
-                height={400}
+                height={600}
+                autoHeight
                 data={users}
                 onRowClick={(data) => {
                   console.log(data);
@@ -79,22 +102,22 @@ const Stats = () => {
                   <Cell dataKey="id" />
                 </Column>
 
-                <Column width={130}>
+                <Column width={300}>
                   <HeaderCell>Participante</HeaderCell>
                   <Cell dataKey="username" />
                 </Column>
 
                 <Column width={130}>
                   <HeaderCell>Aciertos</HeaderCell>
-                  <Cell dataKey="questions" />
+                  <Cell dataKey="answers" />
                 </Column>
 
-                <Column width={200}>
+                <Column width={80}>
                   <HeaderCell>Nivel</HeaderCell>
                   <Cell dataKey="level" />
                 </Column>
 
-                <Column width={200}>
+                <Column width={130}>
                   <HeaderCell>Puntos</HeaderCell>
                   <Cell dataKey="points" />
                 </Column>
