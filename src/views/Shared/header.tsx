@@ -12,8 +12,10 @@ import {
 } from "rsuite";
 import Logo from "../../images/logo.png";
 import firebase from "../../firebase";
-
-const SharedHeader = () => {
+type Props = {
+  level?: object;
+};
+const SharedHeader = (props: Props) => {
   const [userName, setUserName] = useState("");
   const [showDrawer, setDrawer] = useState(false);
   const history = useHistory();
@@ -59,6 +61,11 @@ const SharedHeader = () => {
               <img src={Logo} alt="Logo" />
             </a>
           </Navbar.Header>
+          {props.level ? (
+            <div className="header-level-info">{props.level}</div>
+          ) : (
+            ``
+          )}
           <Navbar.Body>
             <Nav pullRight>
               <Nav.Item onClick={() => setDrawer(true)}>

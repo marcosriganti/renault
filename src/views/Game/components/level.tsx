@@ -180,25 +180,17 @@ const Level = () => {
       setCompleteShown(true);
     }
   };
-
+  const levelInfo = (
+    <div>
+      Nivel {levelId} <b>|</b> {points} puntos <b>|</b>{" "}
+      {levels[levelId].answered.length}/{levels[levelId].total}
+    </div>
+  );
   return (
     <>
       <Container>
-        <SharedHeader />
+        <SharedHeader level={levelInfo} />
         <Content style={{ background: "#56657A" }}>
-          <Grid>
-            <Row className="login-top">
-              <Col xs={24} md={12} className="text-left">
-                <div className="level-info">
-                  <p>Nivel {levelId}</p>
-                  <p>{points} puntos</p>
-                  <p>
-                    {levels[levelId].answered.length}/{levels[levelId].total}
-                  </p>
-                </div>
-              </Col>
-            </Row>
-          </Grid>
           <div className="game-board">
             <img src={LevelImages[levelId]} alt="" className="game-img"></img>
             <div className="image-svg">
