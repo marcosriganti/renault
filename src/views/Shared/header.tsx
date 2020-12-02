@@ -50,6 +50,10 @@ const SharedHeader = () => {
             <a
               className="navbar-brand logo"
               href="https://www.renault.com.ar/"
+              onClick={(ev) => {
+                ev.preventDefault();
+                history.push("/dashboard");
+              }}
               target="_blank"
             >
               <img src={Logo} alt="Logo" />

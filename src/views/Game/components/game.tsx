@@ -8,6 +8,7 @@ import { Content, Container, Icon, Grid, Row, Col, Progress } from "rsuite";
 import firebase from "../../../firebase";
 import SharedFooter from "../../Shared/footer";
 import SharedHeader from "../../Shared/header";
+import Loading from "../../Shared/loading";
 
 import Level1 from "../../../images/nivel 1_400.jpg";
 import Level2 from "../../../images/nivel 2_400.jpg";
@@ -71,7 +72,7 @@ const Game = () => {
       // No user is signed in.
     }
   }, []);
-  if (loading) return <></>;
+  if (loading) return <Loading />;
   return (
     <Container>
       <SharedHeader />

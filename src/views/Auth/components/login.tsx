@@ -4,6 +4,7 @@ import moment from "moment";
 import firebase from "../../../firebase";
 import "firebase/auth";
 import "firebase/firestore";
+
 import { AuthContext } from "../../../AuthProvider";
 import LoginImage from "../../../images/login-img.png";
 import {
@@ -21,9 +22,13 @@ import {
   DatePicker,
   Divider,
   Icon,
+  Grid,
+  Row,
+  Col,
 } from "rsuite";
 import { Input } from "rsuite";
 import SharedFooter from "../../Shared/footer";
+import Loading from "../../Shared/loading";
 
 interface UserData {
   file: string;
@@ -158,82 +163,94 @@ const Login = () => {
   };
 
   if (loadingAuthState) {
-    return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
     <Container>
-      <Content style={{ paddingTop: 100 }}>
-        <FlexboxGrid justify="center" align="middle" className="login-top">
-          <FlexboxGrid.Item colspan={6}>
-            <div>
-              <h1>Bienvenidos</h1>
-            </div>
-          </FlexboxGrid.Item>
-          <FlexboxGrid.Item colspan={6}>
-            <img src={LoginImage} alt="Bienvenidos" />
-          </FlexboxGrid.Item>
-        </FlexboxGrid>
-        <FlexboxGrid justify="center" className="login-middle">
-          <FlexboxGrid.Item colspan={6}>
-            <div className="legend">INICIAR SESIÓN</div>
-            <p>Con tu legajo - Exclusivo colaboradores Renault</p>
-            <Form>
-              <FormGroup>
-                <ControlLabel>Legajo</ControlLabel>
-                <div className="rs-form-control-wrapper">
-                  <Input
-                    name="file"
-                    type="text"
-                    value={values.file}
-                    placeholder="Ingresa tu legajo"
-                    onChange={(val, e) => handleChange(e, val)}
+      <Content
+        style={{
+          paddingTop: 100,
+          paddingLeft: 10,
+          paddingRight: 10,
+          paddingBottom: 30,
+        }}
+      >
+        <Grid>
+          <Row className="login-top">
+            <Col md={18} mdOffset={3}>
+              <Row>
+                <Col md={12} style={{ textAlign: "center" }}>
+                  <h1>Bienvenidos</h1>
+                </Col>
+                <Col md={12} xsHidden={true}>
+                  <img src={LoginImage} alt="Bienvenidos" />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+
+        <Grid>
+          <Row className="login-middle">
+            <Col md={10} mdOffset={7}>
+              <div className="legend">INICIAR SESIÓN</div>
+              <p>Con tu legajo - Exclusivo colaboradores Renault</p>
+              <Form>
+                <FormGroup>
+                  <ControlLabel>Legajo</ControlLabel>
+                  <div className="rs-form-control-wrapper">
+                    <Input
+                      name="file"
+                      type="text"
+                      value={values.file}
+                      placeholder="Ingresa tu legajo"
+                      onChange={(val, e) => handleChange(e, val)}
+                    />
+                  </div>
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Fecha de Nacimiento</ControlLabel>
+                  <DatePicker
+                    oneTap
+                    style={{ width: 280 }}
+                    format={"DD-MM-YYYY"}
+                    value={new Date(values.password)}
+                    onChange={(val, e) => handleDateChange(e, val)}
                   />
-                </div>
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Fecha de Nacimiento</ControlLabel>
-                <DatePicker
-                  oneTap
-                  style={{ width: 280 }}
-                  format={"DD-MM-YYYY"}
-                  value={new Date(values.password)}
-                  onChange={(val, e) => handleDateChange(e, val)}
-                />
-                <div className="rs-form-control-wrapper">
-                  <HelpBlock tooltip>Ejemplo: 11-10-1987</HelpBlock>
-                </div>
-              </FormGroup>
-              <FormGroup>
-                <ButtonToolbar>
-                  <Button color="yellow" onClick={handleSubmit}>
-                    Enviar
-                  </Button>
-                </ButtonToolbar>
-              </FormGroup>
-            </Form>
-            <Divider />
-            <p>Con tus redes</p>
-            <ButtonToolbar>
-              <Button
-                appearance="default"
-                onClick={() => handleSocialClick("Facebook")}
-              >
-                <Icon icon="facebook-official" /> Conectar con Facebook
-              </Button>
-              <Button
-                appearance="default"
-                onClick={() => handleSocialClick("Google")}
-              >
-                <Icon icon="google" /> Contectar con Gmail
-              </Button>
-            </ButtonToolbar>
-          </FlexboxGrid.Item>
-        </FlexboxGrid>
+                  <div className="rs-form-control-wrapper">
+                    <HelpBlock tooltip>Ejemplo: 11-10-1987</HelpBlock>
+                  </div>
+                </FormGroup>
+                <FormGroup>
+                  <ButtonToolbar>
+                    <Button color="yellow" onClick={handleSubmit}>
+                      Enviar
+                    </Button>
+                  </ButtonToolbar>
+                </FormGroup>
+              </Form>
+              <Divider />
+              <p>Con tus redes</p>
+              <ButtonToolbar>
+                <Button
+                  appearance="default"
+                  onClick={() => handleSocialClick("Facebook")}
+                >
+                  <Icon icon="facebook-official" />{" "}
+                  <span className="hiddenXs">Conectar</span> con Facebook
+                </Button>
+                <Button
+                  appearance="default"
+                  onClick={() => handleSocialClick("Google")}
+                >
+                  <Icon icon="google" />{" "}
+                  <span className="hiddenXs">Contectar</span> con Gmail
+                </Button>
+              </ButtonToolbar>
+            </Col>
+          </Row>
+        </Grid>
       </Content>
       <SharedFooter />
     </Container>

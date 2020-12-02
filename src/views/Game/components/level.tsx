@@ -48,6 +48,7 @@ const Level = () => {
   const authContext = useContext(AuthContext);
   const [docID, setDocID] = useState(null);
   const [level, setLevel] = useState(1);
+  const [completeShown, setCompleteShown] = useState(false);
   const [points, setPoints] = useState(0);
   const [levelComplete, setLevelComplete] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -143,7 +144,7 @@ const Level = () => {
     setLevels(newLevels);
 
     if (
-      newLevels[levelId].answered.length === newLevels[levelId].total &&
+      newLevels[levelId].answered.length >= newLevels[levelId].total * 0.7 &&
       parseInt(levelId) === level &&
       level < 4
     ) {
@@ -158,7 +159,10 @@ const Level = () => {
     });
   };
   const checkObject = (num) => {
-    if (levels[levelId].answered.includes(parseInt(num))) return;
+    if (levels[levelId].answered.includes(parseInt(num))) {
+      setAnswer(questions[num].correct);
+      setAnswered(true);
+    }
     if (questions[num]) {
       setCurrentQuestion(num);
     }
@@ -166,9 +170,14 @@ const Level = () => {
   const close = () => {
     setCurrentQuestion("");
     setAnswered(false);
-    if (levels[levelId].answered.length === levels[levelId].total) {
+
+    if (
+      !completeShown &&
+      levels[levelId].answered.length >= levels[levelId].total * 0.7
+    ) {
       // Show Next
       setLevelComplete(true);
+      setCompleteShown(true);
     }
   };
 
@@ -231,18 +240,19 @@ const Level = () => {
             onClick={() => {
               history.push(`/game/level/${level}`);
               setLevelComplete(false);
+              window.location.reload();
             }}
           >
             Ir al Nivel {level}
           </Button>
           <Button onClick={() => setLevelComplete(false)} appearance="default">
-            Cerrar
+            Continuar este nivel
           </Button>
         </Modal.Footer>
       </Modal>
       <Modal size="sm" show={currentQuestion !== ""} onHide={close}>
         <Modal.Header>
-          <Modal.Title>Pregunta</Modal.Title>
+          <Modal.Title>{``}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
           {answered ? (
@@ -256,7 +266,7 @@ const Level = () => {
               ) : (
                 <>
                   <h2 className="error">CASI CASI</h2>
-                  <p>Prueba una vez mas!</p>
+                  <p>Probá una vez mas!</p>
                   <h2 className="error">-5 pts.</h2>
                 </>
               )}
