@@ -128,14 +128,14 @@ const Stats = () => {
                   <h3>Hola {currentUser.username} </h3>
                   <h3>Sumaste: {currentUser.points} Puntos</h3>
                 </Col>
-                <Col md={2} xsHidden={true}>
+                <Col md={2} xs={12} xsHidden>
                   <Circle
                     percent={(questions * 100) / 65}
                     strokeColor="#ffc107"
                     showInfo={false}
                   />
                 </Col>
-                <Col md={2} xsHidden={true}>
+                <Col md={2} xs={12}>
                   <h4
                     style={{
                       color: "rgb(165, 173, 187)",
@@ -148,14 +148,14 @@ const Stats = () => {
                     <small style={{ fontSize: 13 }}>preguntas</small>
                   </h4>
                 </Col>
-                <Col md={2} xsHidden={true}>
+                <Col md={2} xs={12} xsHidden>
                   <Circle
                     percent={(currentUser.level * 100) / 4}
                     strokeColor="#ffc107"
                     showInfo={false}
                   />
                 </Col>
-                <Col md={2} xsHidden={true}>
+                <Col md={2} xs={12}>
                   <h4
                     style={{
                       color: "rgb(165, 173, 187)",
