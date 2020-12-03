@@ -17,6 +17,7 @@ import {
 import firebase from "../../../firebase";
 import SharedFooter from "../../Shared/footer";
 import SharedHeader from "../../Shared/header";
+import Loading from "../../Shared/loading";
 
 import Level1Image from "../../../images/levels/level1.jpg";
 import Level2Image from "../../../images/levels/level2.jpg";
@@ -45,6 +46,7 @@ const LevelImages = {
   4: Level4Image,
 };
 const Level = () => {
+  const [loading, setLoading] = useState(true);
   const authContext = useContext(AuthContext);
   const [docID, setDocID] = useState(null);
   const [level, setLevel] = useState(1);
@@ -122,6 +124,7 @@ const Level = () => {
                 setQuestions(qs);
               });
           });
+          setLoading(false);
         });
     }
   }, []);
@@ -186,6 +189,9 @@ const Level = () => {
       {levels[levelId].answered.length}/{levels[levelId].total}
     </div>
   );
+
+  if (loading) return <Loading />;
+
   return (
     <>
       <Container>
