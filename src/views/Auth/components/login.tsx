@@ -155,7 +155,19 @@ const Login = () => {
         throw new Error("Unsupported SNS" + sns);
     }
 
-    firebase.auth().signInWithRedirect(provider).catch(handleAuthError);
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        if (!result || !result.user || !firebase.auth().currentUser) {
+          return;
+        }
+
+        return setUserProfile().then(() => {
+          redirectToTargetPage();
+        });
+      })
+      .catch(handleAuthError);
   };
 
   const handleAuthError = (error: firebase.auth.Error) => {
