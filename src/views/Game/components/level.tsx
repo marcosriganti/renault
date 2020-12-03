@@ -5,9 +5,7 @@ import "firebase/firestore";
 import {
   Content,
   Container,
-  Grid,
-  Row,
-  Col,
+  Icon,
   Modal,
   Radio,
   RadioGroup,
@@ -53,6 +51,7 @@ const Level = () => {
   const [completeShown, setCompleteShown] = useState(false);
   const [points, setPoints] = useState(0);
   const [levelComplete, setLevelComplete] = useState(false);
+  const [gameComplete, setGameComplete] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [answer, setAnswer] = useState("");
   const [levels, setLevels] = useState({
@@ -175,11 +174,25 @@ const Level = () => {
     setAnswered(false);
 
     if (
+      parseInt(levelId) !== 4 &&
       !completeShown &&
       levels[levelId].answered.length >= levels[levelId].total * 0.7
     ) {
       // Show Next
       setLevelComplete(true);
+      setCompleteShown(true);
+    }
+    let answeredQuestions = 0;
+    if (levels) {
+      Object.keys(levels).map((key) => {
+        const lvl = levels[key];
+        answeredQuestions += lvl.answered.length;
+      });
+    }
+
+    if (!completeShown && parseInt(levelId) === 4 && answeredQuestions === 65) {
+      // Show all finished
+      setGameComplete(true);
       setCompleteShown(true);
     }
   };
@@ -245,6 +258,35 @@ const Level = () => {
           </Button>
           <Button onClick={() => setLevelComplete(false)} appearance="default">
             Continuar este nivel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal size="sm" show={gameComplete} onHide={close}>
+        <Modal.Body className="text-center">
+          <h1>
+            65/65 <br />{" "}
+            <span style={{ color: "#ffcc00" }}>FELICITACIONES</span>
+          </h1>
+          <h2>Sos un experto Renault, compartilo con todos.</h2>
+          <a
+            href="https://www.facebook.com/sharer/sharer.php?u=http%3A//lausina.org/universo65"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon icon="facebook-official" size="4x" />
+          </a>
+          &nbsp;&nbsp;&nbsp;
+          <a
+            href="https://twitter.com/intent/tweet?text=http%3A//lausina.org/universo65"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon icon="twitter" size="4x" />
+          </a>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => setGameComplete(false)} appearance="default">
+            Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
