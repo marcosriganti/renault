@@ -51,6 +51,7 @@ const Level = () => {
   const [completeShown, setCompleteShown] = useState(false);
   const [points, setPoints] = useState(0);
   const [levelComplete, setLevelComplete] = useState(false);
+  const [nextLevel, setNextLevel] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [answer, setAnswer] = useState("");
@@ -176,11 +177,16 @@ const Level = () => {
     if (
       parseInt(levelId) !== 4 &&
       !completeShown &&
-      levels[levelId].answered.length >= levels[levelId].total * 0.7
+      levels[levelId].answered.length >= levels[levelId].total * 0.7 &&
+      levels[levelId].answered.length !== levels[levelId].total
     ) {
       // Show Next
-      setLevelComplete(true);
       setCompleteShown(true);
+      setLevelComplete(true);
+    }
+
+    if (levels[levelId].answered.length === levels[levelId].total) {
+      setNextLevel(true);
     }
     let answeredQuestions = 0;
     if (levels) {
@@ -189,7 +195,6 @@ const Level = () => {
         answeredQuestions += lvl.answered.length;
       });
     }
-
     if (!completeShown && parseInt(levelId) === 4 && answeredQuestions === 65) {
       // Show all finished
       setGameComplete(true);
@@ -238,6 +243,29 @@ const Level = () => {
         </Content>
         <SharedFooter />
       </Container>
+
+      <Modal size="sm" show={nextLevel} onHide={close}>
+        <Modal.Header>
+          <Modal.Title>Increible!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          <h2 className="done">Muy bien! lo lograste!</h2>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            color="yellow"
+            onClick={() => {
+              history.push(
+                `/game/level/${Math.min(level, parseInt(levelId) + 1)}`
+              );
+              setNextLevel(false);
+              window.location.reload();
+            }}
+          >
+            podes pasar al siguiente nivel!
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Modal size="sm" show={levelComplete} onHide={close}>
         <Modal.Header>
           <Modal.Title>Increible!</Modal.Title>
