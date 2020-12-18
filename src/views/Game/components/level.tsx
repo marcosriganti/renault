@@ -246,10 +246,10 @@ const Level = () => {
 
       <Modal size="sm" show={nextLevel} onHide={close}>
         <Modal.Header>
-          <Modal.Title>Increible!</Modal.Title>
+          <Modal.Title>Increíble!</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <h2 className="done">Muy bien! lo lograste!</h2>
+          <h2 className="done">Muy bien! Lo lograste!</h2>
         </Modal.Body>
         <Modal.Footer>
           <Button

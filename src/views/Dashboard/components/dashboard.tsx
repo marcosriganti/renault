@@ -34,7 +34,7 @@ const Dashboard = () => {
               <p>
                 En el año del 65° aniversario de Fábrica Santa Isabel, queremos
                 invitarte a jugar y recorrer de manera divertida la historia de
-                nuestra Fabrica y de Renault.
+                nuestra Fábrica y de Renault.
               </p>
               <p>
                 Universo Renault es una plataforma online, donde podrás jugar y

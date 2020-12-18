@@ -205,13 +205,23 @@ body,
 
 .level img {
   width: 100%;
-  filter: grayscale(90%);
-  transition: all 1s;
 
+  filter: grayscale(90%);
+  -webkit-filter: grayscale(90%);
+  filter: none;
+  /* IE 6-9 */
+
+  transition: all 1s;
+  overflow: hidden;
+  border-radius: 40px;
 }
 
 .level:hover img {
   filter: grayscale(0%);
+  -webkit-filter: grayscale(0%);
+  filter: none;
+  /* IE 6-9 */
+  overflow: hidden;
 }
 
 .level {
@@ -226,6 +236,10 @@ body,
 .level .progress {
   width: 70%;
   margin: auto
+}
+
+.level .image {
+  border-radius: 40px;
 }
 
 .level .info h3 {
