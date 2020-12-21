@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
+import DatePicker from "react-date-picker";
 import firebase from "../../../firebase";
 import "firebase/auth";
 import "firebase/firestore";
@@ -19,7 +20,7 @@ import {
   Content,
   Container,
   FlexboxGrid,
-  DatePicker,
+  // DatePicker,
   Divider,
   Icon,
   Grid,
@@ -110,12 +111,12 @@ const Login = () => {
     }));
   };
 
-  const handleDateChange = (event: any, val: Date) => {
-    event.persist();
+  const handleDateChange = (event: any, val: Date | Date[]) => {
+    // event.persist();
     if (val == null) val = new Date();
     setValues((values) => ({
       ...values,
-      password: moment(val).format("YYYY-MM-DD"),
+      password: moment(Array.isArray(val) ? val[0] : val).format("YYYY-MM-DD"),
     }));
   };
 
@@ -223,13 +224,21 @@ const Login = () => {
                 </FormGroup>
                 <FormGroup>
                   <ControlLabel>Fecha de Nacimiento</ControlLabel>
+
                   <DatePicker
+                    // id="example-datepicker"
+                    className="rs-input"
+                    format="dd-MM-y"
+                    value={new Date(values.password)}
+                    onChange={(date) => handleDateChange(null, date)}
+                  />
+                  {/* <DatePicker
                     oneTap
                     style={{ width: 280 }}
                     format={"DD-MM-YYYY"}
                     value={new Date(values.password)}
                     onChange={(val, e) => handleDateChange(e, val)}
-                  />
+                  /> */}
                   <div className="rs-form-control-wrapper">
                     <HelpBlock tooltip>Ejemplo: 11-10-1987</HelpBlock>
                   </div>

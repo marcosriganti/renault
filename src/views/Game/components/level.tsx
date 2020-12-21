@@ -163,6 +163,7 @@ const Level = () => {
   };
   const checkObject = (num) => {
     if (levels[levelId].answered.includes(parseInt(num))) {
+      console.log("looking for questions[num]", num, questions[num]);
       setAnswer(questions[num].correct);
       setAnswered(true);
     }
@@ -244,7 +245,12 @@ const Level = () => {
         <SharedFooter />
       </Container>
 
-      <Modal size="sm" show={nextLevel} onHide={close}>
+      <Modal
+        size="sm"
+        show={nextLevel && parseInt(levelId) !== 4}
+        onHide={close}
+        keyboard={false}
+      >
         <Modal.Header>
           <Modal.Title>Increíble!</Modal.Title>
         </Modal.Header>
@@ -266,7 +272,7 @@ const Level = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal size="sm" show={levelComplete} onHide={close}>
+      <Modal size="sm" show={levelComplete} onHide={close} keyboard={false}>
         <Modal.Header>
           <Modal.Title>Increible!</Modal.Title>
         </Modal.Header>
@@ -289,7 +295,7 @@ const Level = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal size="sm" show={gameComplete} onHide={close}>
+      <Modal size="sm" show={gameComplete} onHide={close} keyboard={false}>
         <Modal.Body className="text-center">
           <h1>
             65/65 <br />{" "}
@@ -318,7 +324,12 @@ const Level = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal size="sm" show={currentQuestion !== ""} onHide={close}>
+      <Modal
+        size="sm"
+        show={currentQuestion !== ""}
+        onHide={close}
+        keyboard={false}
+      >
         <Modal.Header>
           <Modal.Title>{``}</Modal.Title>
         </Modal.Header>

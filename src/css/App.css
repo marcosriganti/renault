@@ -355,3 +355,11 @@ body,
 .loading-content {
   flex-direction: row;
 }
+
+.react-date-picker__wrapper {
+  border: 0
+}
+
+.react-date-picker {
+  max-width: 300px;
+}
