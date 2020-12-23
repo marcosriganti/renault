@@ -51,7 +51,7 @@ const Level = () => {
   const [completeShown, setCompleteShown] = useState(false);
   const [points, setPoints] = useState(0);
   const [levelComplete, setLevelComplete] = useState(false);
-  const [nextLevel, setNextLevel] = useState(false);
+  const [nextLevel, setNextLevel] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
   const [answered, setAnswered] = useState(false);
   const [answer, setAnswer] = useState("");
@@ -186,8 +186,11 @@ const Level = () => {
       setLevelComplete(true);
     }
 
-    if (levels[levelId].answered.length === levels[levelId].total) {
-      setNextLevel(true);
+    if (
+      levels[levelId].answered.length === levels[levelId].total &&
+      nextLevel === 0
+    ) {
+      setNextLevel(1);
     }
     let answeredQuestions = 0;
     if (levels) {
@@ -247,8 +250,8 @@ const Level = () => {
 
       <Modal
         size="sm"
-        show={nextLevel && parseInt(levelId) !== 4}
-        onHide={close}
+        show={nextLevel === 1 && parseInt(levelId) !== 4}
+        onHide={() => setNextLevel(-1)}
         keyboard={false}
       >
         <Modal.Header>
@@ -264,7 +267,7 @@ const Level = () => {
               history.push(
                 `/game/level/${Math.min(level, parseInt(levelId) + 1)}`
               );
-              setNextLevel(false);
+              setNextLevel(-1);
               window.location.reload();
             }}
           >
@@ -295,7 +298,12 @@ const Level = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal size="sm" show={gameComplete} onHide={close} keyboard={false}>
+      <Modal
+        size="sm"
+        show={gameComplete}
+        onHide={() => setGameComplete(false)}
+        keyboard={false}
+      >
         <Modal.Body className="text-center">
           <h1>
             65/65 <br />{" "}

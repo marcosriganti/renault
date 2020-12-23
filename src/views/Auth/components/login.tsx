@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
-import DatePicker from "react-date-picker";
+// import DatePicker from "react-date-picker";
 import firebase from "../../../firebase";
 import "firebase/auth";
 import "firebase/firestore";
+// import DatePicker from "react-datepicker";
+// import InputMask from "react-input-mask";
 
 import { AuthContext } from "../../../AuthProvider";
 import LoginImage from "../../../images/login-img.png";
@@ -20,7 +22,7 @@ import {
   Content,
   Container,
   FlexboxGrid,
-  // DatePicker,
+  DatePicker,
   Divider,
   Icon,
   Grid,
@@ -112,6 +114,7 @@ const Login = () => {
   };
 
   const handleDateChange = (event: any, val: Date | Date[]) => {
+    console.log(">> handleDateChange", val);
     // event.persist();
     if (val == null) val = new Date();
     setValues((values) => ({
@@ -224,21 +227,32 @@ const Login = () => {
                 </FormGroup>
                 <FormGroup>
                   <ControlLabel>Fecha de Nacimiento</ControlLabel>
-
-                  <DatePicker
+                  {/* <InputMask
+                    mask="99-99-9999"
+                    // maskChar=" "
+                    className="rs-input react-date-picker "
+                    value={moment(new Date(values.password)).format(
+                      "DD-MM-YYYY"
+                    )}
+                    onChange={(ev) => {
+                      console.log(ev, ev.target.value);
+                      return handleDateChange(ev, moment(ev.target.value).toDate());
+                    }}
+                  /> */}
+                  {/* <DatePicker
                     // id="example-datepicker"
                     className="rs-input"
                     format="dd-MM-y"
                     value={new Date(values.password)}
                     onChange={(date) => handleDateChange(null, date)}
-                  />
-                  {/* <DatePicker
+                  /> */}
+                  <DatePicker
                     oneTap
                     style={{ width: 280 }}
                     format={"DD-MM-YYYY"}
                     value={new Date(values.password)}
                     onChange={(val, e) => handleDateChange(e, val)}
-                  /> */}
+                  />
                   <div className="rs-form-control-wrapper">
                     <HelpBlock tooltip>Ejemplo: 11-10-1987</HelpBlock>
                   </div>
