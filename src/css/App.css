@@ -47,6 +47,21 @@ body {
   display: none;
 }
 
+@media (max-width: 768px) {
+
+  .footer .text-left,
+  .footer .text-right {
+    text-align: center;
+  }
+
+  .rs-navbar-header {
+    float: none;
+    margin: auto;
+    display: block;
+    text-align: center;
+  }
+}
+
 @media (min-width: 768px) {
   .hiddenXs {
     display: inline;
@@ -206,9 +221,9 @@ body,
 .level img {
   width: 100%;
 
-  filter: grayscale(90%);
-  -webkit-filter: grayscale(90%);
-  filter: none;
+  /* filter: grayscale(90%); */
+  /* -webkit-filter: grayscale(90%); */
+  /* filter: none; */
   /* IE 6-9 */
 
   transition: all 1s;
@@ -217,9 +232,9 @@ body,
 }
 
 .level:hover img {
-  filter: grayscale(0%);
+  /* filter: grayscale(0%);
   -webkit-filter: grayscale(0%);
-  filter: none;
+  filter: none; */
   /* IE 6-9 */
   overflow: hidden;
 }
@@ -229,7 +244,7 @@ body,
   overflow: hidden;
   width: 100%;
   max-width: 450px;
-  margin: 20px;
+  margin: 20px 0;
   position: relative;
 }
 
@@ -246,12 +261,17 @@ body,
   font-size: 42px;
 }
 
+.level:hover .content {
+  background-color: rgba(151, 151, 151, 0.2);
+}
+
 .level .content {
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   top: 0;
+  transition: all 1s;
   width: 100%;
   height: 100%;
   padding: 20px;
@@ -362,4 +382,12 @@ body,
 
 .react-date-picker {
   max-width: 300px;
+}
+
+.rs-modal-sm {
+  max-width: 100%;
+}
+
+.rs-dropdown-menu {
+  z-index: 1005 !important;
 }

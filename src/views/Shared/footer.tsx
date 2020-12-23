@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from "rsuite";
-import { FlexboxGrid, Icon, Footer, Grid, Container } from "rsuite";
+import { FlexboxGrid, Icon, Footer, Grid, Container, Row, Col } from "rsuite";
 import Gota from "../../images/gota.svg";
 import GotaModal from "../../images/gota_modal.svg";
 
@@ -14,8 +14,8 @@ const SharedFooter = () => {
     <>
       <Footer className="footer">
         <Grid>
-          <FlexboxGrid justify="space-between">
-            <FlexboxGrid.Item colspan={6}>
+          <Row>
+            <Col xs={24} md={12} className="text-left">
               <p>
                 <Button
                   appearance="subtle"
@@ -39,8 +39,8 @@ const SharedFooter = () => {
                   Cookies
                 </Button>
               </p>
-            </FlexboxGrid.Item>
-            <FlexboxGrid.Item colspan={4} className="social-links">
+            </Col>
+            <Col xs={24} md={12} className="social-links text-right">
               <a
                 href="https://www.facebook.com/RenaultArgentina"
                 target="_blank"
@@ -76,8 +76,8 @@ const SharedFooter = () => {
                   }}
                 ></img>
               </a>
-            </FlexboxGrid.Item>
-          </FlexboxGrid>
+            </Col>
+          </Row>
         </Grid>
       </Footer>
       <Modal size="sm" show={gota} onHide={() => setGota(false)}>

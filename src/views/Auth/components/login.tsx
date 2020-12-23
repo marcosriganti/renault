@@ -6,7 +6,7 @@ import firebase from "../../../firebase";
 import "firebase/auth";
 import "firebase/firestore";
 // import DatePicker from "react-datepicker";
-// import InputMask from "react-input-mask";
+import InputMask from "react-input-mask";
 
 import { AuthContext } from "../../../AuthProvider";
 import LoginImage from "../../../images/login-img.png";
@@ -36,6 +36,7 @@ import Loading from "../../Shared/loading";
 interface UserData {
   file: string;
   password: string;
+  tempPass: string;
 }
 
 const Login = () => {
@@ -44,6 +45,7 @@ const Login = () => {
   const history = useHistory();
   const [values, setValues] = useState({
     file: "",
+    tempPass: moment().format("DD-MM-YYYY"),
     password: moment().format("YYYY-MM-DD"),
   } as UserData);
 
@@ -114,7 +116,7 @@ const Login = () => {
   };
 
   const handleDateChange = (event: any, val: Date | Date[]) => {
-    console.log(">> handleDateChange", val);
+    // console.log(">> handleDateChange", val);
     // event.persist();
     if (val == null) val = new Date();
     setValues((values) => ({
@@ -126,13 +128,12 @@ const Login = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const email = values.file + "@renault.com.ar";
-    const password = values.password;
+    const password = values.tempPass.split("-").reverse().join("-");
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         authContext.setUser(res);
-        console.log(res, "res");
         history.push("/dashboard");
       })
       .catch((error) => {
@@ -142,18 +143,14 @@ const Login = () => {
   };
 
   const handleSocialClick = (sns: any) => {
-    console.log(sns, "sns");
-
     let provider: firebase.auth.AuthProvider;
     switch (sns) {
       case "Facebook":
         provider = new firebase.auth.FacebookAuthProvider();
-        console.log(provider, "fbprovider");
         break;
 
       case "Google":
         provider = new firebase.auth.GoogleAuthProvider();
-        console.log(provider, "gprovider");
         break;
       default:
         throw new Error("Unsupported SNS" + sns);
@@ -181,7 +178,9 @@ const Login = () => {
   if (loadingAuthState) {
     return <Loading />;
   }
-
+  const isValidDate = (d: Date) => {
+    return d instanceof Date;
+  };
   return (
     <Container>
       <Content
@@ -227,18 +226,28 @@ const Login = () => {
                 </FormGroup>
                 <FormGroup>
                   <ControlLabel>Fecha de Nacimiento</ControlLabel>
-                  {/* <InputMask
+                  <InputMask
                     mask="99-99-9999"
                     // maskChar=" "
                     className="rs-input react-date-picker "
-                    value={moment(new Date(values.password)).format(
-                      "DD-MM-YYYY"
-                    )}
+                    value={values.tempPass}
                     onChange={(ev) => {
-                      console.log(ev, ev.target.value);
-                      return handleDateChange(ev, moment(ev.target.value).toDate());
+                      const val = ev.target.value;
+
+                      setValues((values) => ({
+                        ...values,
+                        tempPass: val,
+                        password: isValidDate(val)
+                          ? moment(val).format("YYYY-MM-DD")
+                          : values.password,
+                      }));
+
+                      // return handleDateChange(
+                      //   ev,
+                      //   moment(ev.target.value).toDate()
+                      // );
                     }}
-                  /> */}
+                  />
                   {/* <DatePicker
                     // id="example-datepicker"
                     className="rs-input"
@@ -246,13 +255,13 @@ const Login = () => {
                     value={new Date(values.password)}
                     onChange={(date) => handleDateChange(null, date)}
                   /> */}
-                  <DatePicker
+                  {/* <DatePicker
                     oneTap
                     style={{ width: 280 }}
                     format={"DD-MM-YYYY"}
                     value={new Date(values.password)}
                     onChange={(val, e) => handleDateChange(e, val)}
-                  />
+                  /> */}
                   <div className="rs-form-control-wrapper">
                     <HelpBlock tooltip>Ejemplo: 11-10-1987</HelpBlock>
                   </div>

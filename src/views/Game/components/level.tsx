@@ -163,7 +163,7 @@ const Level = () => {
   };
   const checkObject = (num) => {
     if (levels[levelId].answered.includes(parseInt(num))) {
-      console.log("looking for questions[num]", num, questions[num]);
+      // console.log("looking for questions[num]", num, questions[num]);
       setAnswer(questions[num].correct);
       setAnswered(true);
     }
@@ -255,10 +255,10 @@ const Level = () => {
         keyboard={false}
       >
         <Modal.Header>
-          <Modal.Title>Increíble!</Modal.Title>
+          <Modal.Title>¡Increíble!</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <h2 className="done">Muy bien! Lo lograste!</h2>
+          <h2 className="done">¡Muy bien! ¡Lo Lograste!</h2>
         </Modal.Body>
         <Modal.Footer>
           <Button
@@ -271,16 +271,21 @@ const Level = () => {
               window.location.reload();
             }}
           >
-            podes pasar al siguiente nivel!
+            ¡Podés pasar al siguiente nivel!
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal size="sm" show={levelComplete} onHide={close} keyboard={false}>
+      <Modal
+        size="sm"
+        show={levelComplete}
+        onHide={() => setLevelComplete(false)}
+        keyboard={false}
+      >
         <Modal.Header>
-          <Modal.Title>Increible!</Modal.Title>
+          <Modal.Title>¡Increible!</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <h2 className="done">Desbloqueaste el Nivel {level}!</h2>
+          <h2 className="done">¡Desbloqueaste el Nivel {level}!</h2>
         </Modal.Body>
         <Modal.Footer>
           <Button
