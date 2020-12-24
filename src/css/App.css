@@ -47,7 +47,7 @@ body {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
 
   .footer .text-left,
   .footer .text-right {
@@ -58,6 +58,18 @@ body {
     float: none;
     margin: auto;
     display: block;
+    text-align: center;
+  }
+
+  .header-level-info {
+    float: none !important;
+    text-align: center !important;
+    line-height: 20px !important;
+  }
+
+  .rs-navbar-nav.rs-navbar-right {
+    float: none;
+    margin: auto;
     text-align: center;
   }
 }

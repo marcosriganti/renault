@@ -128,7 +128,7 @@ const Stats = () => {
                   <h3>Hola {currentUser.username} </h3>
                   <h3>Sumaste: {currentUser.points} Puntos</h3>
                 </Col>
-                <Col md={2} xs={12} xsHidden>
+                <Col md={2} xs={12} xsHidden smHidden>
                   <Circle
                     percent={(questions * 100) / 65}
                     strokeColor="#ffc107"
@@ -148,7 +148,7 @@ const Stats = () => {
                     <small style={{ fontSize: 13 }}>preguntas</small>
                   </h4>
                 </Col>
-                <Col md={2} xs={12} xsHidden>
+                <Col md={2} xs={12} xsHidden smHidden>
                   <Circle
                     percent={(currentUser.level * 100) / 4}
                     strokeColor="#ffc107"
@@ -169,7 +169,7 @@ const Stats = () => {
                     <small style={{ fontSize: 13 }}>niveles</small>
                   </h4>
                 </Col>
-                <Col md={4} xsHidden={true}>
+                <Col md={4} xsHidden={true} smHidden>
                   <Button color="yellow" onClick={() => history.push("/game")}>
                     IR AL JUEGO
                   </Button>
