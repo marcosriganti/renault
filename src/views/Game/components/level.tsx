@@ -188,7 +188,9 @@ const Level = () => {
 
     if (
       levels[levelId].answered.length === levels[levelId].total &&
-      nextLevel === 0
+      nextLevel === 0 &&
+      level <= parseInt(levelId) + 1 &&
+      level > 1
     ) {
       setNextLevel(1);
     }
@@ -277,7 +279,7 @@ const Level = () => {
       </Modal>
       <Modal
         size="sm"
-        show={levelComplete}
+        show={levelComplete && level > 1}
         onHide={() => setLevelComplete(false)}
         keyboard={false}
       >
